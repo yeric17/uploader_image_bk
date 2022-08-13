@@ -17,6 +17,7 @@ func main() {
 	frontendHost := config.FT_HOST
 
 	router.MaxMultipartMemory = 8 << 20 // 8 MiB
+	//config allow host
 	router.SetTrustedProxies([]string{frontendHost})
 	router.Use(corsgin.New(corsgin.Config{
 		AllowOrigins:     []string{frontendHost},
