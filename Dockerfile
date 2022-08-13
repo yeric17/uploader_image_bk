@@ -8,8 +8,9 @@ RUN go build -o main main.go
 # #Run stage
 FROM alpine:3.14
 WORKDIR /app
-COPY --from=builder /app/main ./bin/sh
+COPY --from=builder /app/main .
 COPY --from=builder /app/.env .
+RUN apk add --no-cache bash
 EXPOSE 4000
 CMD [ "/app/main" ]
 
