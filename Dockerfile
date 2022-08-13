@@ -5,12 +5,12 @@ WORKDIR /app
 COPY . .
 RUN go build -o main main.go
 
-#Run stage
-FROM alpine:3.14
-WORKDIR /app
-COPY --from=builder /app/main .
-COPY --from=builder /app/.env .
-COPY --from=builder /app/public/images .
+# #Run stage
+# FROM alpine:3.14
+# WORKDIR /app
+# COPY --from=builder /app/main .
+# COPY --from=builder /app/.env .
+# COPY --from=builder /app/public/images/ .
 EXPOSE 4000
 CMD [ "/app/main" ]
 
