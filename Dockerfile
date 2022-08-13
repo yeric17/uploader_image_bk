@@ -10,8 +10,7 @@ FROM alpine:3.14
 WORKDIR /app
 COPY --from=builder /app/main .
 COPY --from=builder /app/.env .
-COPY --from=builder /app/public ./public
-RUN apk update && apk add bash
+COPY --from=builder /app/public/images ./public/images
 EXPOSE 4000
 CMD [ "/app/main" ]
 
