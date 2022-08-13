@@ -20,7 +20,7 @@ func main() {
 	router.SetTrustedProxies([]string{frontendHost})
 	router.Use(corsgin.New(corsgin.Config{
 		AllowOrigins:     []string{frontendHost},
-		AllowMethods:     []string{"GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"},
+		AllowMethods:     []string{"GET", "POST", "PUT", "PATCH", "OPTIONS"},
 		AllowHeaders:     []string{"Origin", "Content-Length", "Content-Type", "Authorization"},
 		ExposeHeaders:    []string{"Content-Length"},
 		AllowCredentials: true,
