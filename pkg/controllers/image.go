@@ -5,6 +5,7 @@ import (
 	"image-uploader/pkg/config"
 	"image-uploader/pkg/utils"
 	"net/http"
+	"os"
 	"strings"
 
 	"github.com/gin-gonic/gin"
@@ -32,8 +33,12 @@ func UploadImage(context *gin.Context) {
 	}
 
 	fileName := fmt.Sprintf("%s.%s", utils.RandomString(12), file.Filename[strings.LastIndex(file.Filename, ".")+1:])
+	folderPath := "public/images"
+	fullPath := fmt.Sprintf("%s/%s", folderPath, fileName)
 
-	fullPath := fmt.Sprintf("%s/%s", "public/images", fileName)
+	if os.IsNotExist(err) {
+		os.Mkdir(folderPath, 0755)
+	}
 
 	err = context.SaveUploadedFile(file, fullPath)
 
