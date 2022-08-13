@@ -1,1 +1,1 @@
-web: image-uploader
+web: main
