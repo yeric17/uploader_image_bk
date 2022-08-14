@@ -5,7 +5,10 @@ import (
 	"fmt"
 	"image-uploader/pkg/config"
 	"image-uploader/pkg/controllers"
+	"log"
 	"net/http"
+	"os"
+	"strconv"
 	"time"
 
 	corsgin "github.com/gin-contrib/cors"
@@ -24,10 +27,20 @@ func repeatHandler(r int) gin.HandlerFunc {
 
 func main() {
 
-	router := gin.Default()
-
 	frontendHost := config.FT_HOST
 
+	port := os.Getenv("PORT")
+	if port == "" {
+		log.Fatal("$PORT must be set")
+	}
+	tStr := os.Getenv("REPEAT")
+	repeat, err := strconv.Atoi(tStr)
+
+	if err != nil {
+		log.Printf("Error converting $REPEAT to an int: %q - Using default\n", err)
+		repeat = 5
+	}
+	router := gin.New()
 	router.MaxMultipartMemory = 8 << 20 // 8 MiB
 	//config allow host
 	router.SetTrustedProxies([]string{frontendHost})
@@ -42,5 +55,8 @@ func main() {
 	router.Static("/public/images", "./public/images")
 	router.POST("/upload", controllers.UploadImage)
 	fmt.Println(frontendHost)
+
+	router.GET("/repeat", repeatHandler(repeat))
 	router.Run(fmt.Sprintf(":%s", config.API_PORT))
+
 }
