@@ -6,7 +6,7 @@ COPY . .
 RUN go build -o main main.go
 
 #Run stage
-FROM alpine:3.14
+FROM heroku/heroku:20
 WORKDIR /app
 COPY --from=builder /app/main .
 COPY --from=builder /app/.env .

@@ -37,7 +37,7 @@ func main() {
 	router.Static("/public/images", "./public/images")
 	router.POST("/upload", controllers.UploadImage)
 	router.GET("/", func(ctx *gin.Context) {
-		ctx.String(http.StatusOK, "Vienvenido")
+		ctx.String(http.StatusOK, "Bienvenido")
 	})
 
 	fmt.Println(frontendHost)
