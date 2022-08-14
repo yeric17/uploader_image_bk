@@ -13,5 +13,5 @@ COPY --from=builder /app/.env .
 COPY --from=builder /app/public ./public
 RUN apk add --no-cache bash
 EXPOSE 4000
-CMD /app/main
+CMD ./main
 
