@@ -19,11 +19,11 @@ func init() {
 		log.Fatal("Error loading .env file")
 		return
 	}
-
 	PROD_HOST = os.Getenv("PROD_HOST")
 	MODE = os.Getenv("MODE")
 	DEV_HOST = os.Getenv("DEV_HOST")
 	API_PORT = os.Getenv("API_PORT")
+	os.Setenv("PORT", API_PORT)
 	FT_PROD_HOST = os.Getenv("FT_PROD_HOST")
 	FT_DEV_HOST = os.Getenv("FT_DEV_HOST")
 	if MODE == "dev" {
