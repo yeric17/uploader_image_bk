@@ -1,14 +1,26 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"image-uploader/pkg/config"
 	"image-uploader/pkg/controllers"
+	"net/http"
 	"time"
 
 	corsgin "github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
+
+func repeatHandler(r int) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		var buffer bytes.Buffer
+		for i := 0; i < r; i++ {
+			buffer.WriteString("Hello from uploader images!\n")
+		}
+		c.String(http.StatusOK, buffer.String())
+	}
+}
 
 func main() {
 
