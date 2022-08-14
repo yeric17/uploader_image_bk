@@ -6,12 +6,12 @@ COPY . .
 RUN go build -o main main.go
 
 #Run stage
-FROM heroku/heroku:20
+FROM alpine:3.14
 WORKDIR /app
 COPY --from=builder /app/main .
 COPY --from=builder /app/.env .
 COPY --from=builder /app/public ./public
-# RUN apk add --no-cache bash
+RUN apk add --no-cache bash
 EXPOSE 4000
 CMD ./main
 

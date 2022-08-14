@@ -6,7 +6,6 @@ import (
 	"image-uploader/pkg/controllers"
 	"log"
 	"net/http"
-	"os"
 	"time"
 
 	corsgin "github.com/gin-contrib/cors"
@@ -17,7 +16,7 @@ func main() {
 
 	frontendHost := config.FT_HOST
 
-	port := os.Getenv("PORT")
+	port := config.PORT
 	if port == "" {
 		log.Fatal("$PORT must be set")
 	}
@@ -42,6 +41,6 @@ func main() {
 
 	fmt.Println(frontendHost)
 
-	router.Run(fmt.Sprintf(":%s", config.API_PORT))
+	router.Run(fmt.Sprintf(":%s", port))
 
 }
